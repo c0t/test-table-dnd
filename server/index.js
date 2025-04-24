@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 
 app.use(cors({
-  origin: ['https://ppqp.ru', 'https://www.ppqp.ru', 'http://localhost:5000', 'http://ppqp.ru:5000'],
+  origin: ['https://ppqp.ru', 'https://www.ppqp.ru', 'http://localhost:5000', 'http://185.221.214.24:5000', 'http://ppqp.ru:5000'],
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
 }));
