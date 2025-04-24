@@ -3,7 +3,11 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ['https://ppqp.ru', 'https://www.ppqp.ru', 'http://localhost:5000', 'http://ppqp.ru:5000'],
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
+}));
 app.use(express.json());
 
 // Массив чисел от 1 до 1,000,000

@@ -132,6 +132,7 @@ const App = () => {
   return (
     <div className="App">
       <h1>Список чисел</h1>
+      <label htmlFor="search-input">Поиск:</label>
       <input
         id="search-input"
         name="search"
