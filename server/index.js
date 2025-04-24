@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const app = express();
 
 app.use(cors());
@@ -9,9 +10,9 @@ app.use(express.json());
 const items = Array.from({ length: 1000000 }, (_, i) => ({
   id: i + 1,
   value: i + 1,
-}))
+}));
 
-// Хранилище состояния (выбранные элементы и порядок)
+// Хранилище состояния
 let selectedItems = new Set();
 let customOrder = [];
 
@@ -28,7 +29,7 @@ app.get('/api/items', (req, res) => {
     filteredItems = items.filter(item => item.value.toString().includes(search));
   }
 
-  // Применение пользовательского порядка, если он есть
+  // Применение пользовательского порядка
   let resultItems = filteredItems;
   if (customOrder.length > 0) {
     const orderedItems = [];
@@ -63,6 +64,13 @@ app.post('/api/select', (req, res) => {
   res.json({ success: true });
 });
 
-app.listen(5000, () => {
-  console.log('Server running on http://localhost:5000');
+// Обслуживание статических файлов React
+app.use(express.static(path.join(__dirname, '../client/build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });
