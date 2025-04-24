@@ -17,6 +17,8 @@ const SortableItem = ({ id, value, index, selected, handleSelect }) => {
     <tr ref={setNodeRef} style={style} {...attributes} {...listeners}>
       <td>
         <input
+          id={`checkbox-${id}`}
+          name={`checkbox-${id}`}
           type="checkbox"
           checked={selected.has(id)}
           onChange={() => handleSelect(id)}
@@ -131,6 +133,8 @@ const App = () => {
     <div className="App">
       <h1>Список чисел</h1>
       <input
+        id="search-input"
+        name="search"
         type="text"
         placeholder="Поиск..."
         value={search}
