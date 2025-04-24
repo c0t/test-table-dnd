@@ -51,7 +51,7 @@ const App = () => {
   const fetchItems = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:5000/api/items?page=${page}&search=${search}`);
+      const response = await axios.get(`/api/items?page=${page}&search=${search}`);
       setItems(prev => (page === 1 ? response.data.items : [...prev, ...response.data.items]));
       setTotal(response.data.total);
       setSelected(new Set(response.data.selected));
@@ -92,7 +92,7 @@ const App = () => {
     }
     setSelected(newSelected);
     try {
-      await axios.post('http://localhost:5000/api/select', { selected: Array.from(newSelected) });
+      await axios.post('/api/select', { selected: Array.from(newSelected) });
     } catch (error) {
       console.error('Ошибка сохранения выбора:', error);
     }
@@ -112,7 +112,7 @@ const App = () => {
 
     setItems(reorderedItems);
     try {
-      await axios.post('http://localhost:5000/api/order', {
+      await axios.post('/api/order', {
         order: reorderedItems.map(item => item.id),
       });
     } catch (error) {
